@@ -2,8 +2,7 @@ import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers":
-    "authorization, x-client-info, apikey, content-type",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
   "Access-Control-Allow-Methods": "POST, GET, OPTIONS, PUT, DELETE",
 };
 
@@ -36,7 +35,7 @@ serve(async (req) => {
       );
     }
 
-    const emailContent = `Welcome to Morocco Tours!
+    const emailText = `Welcome to Morocco Tours!
 
 Your website is live at: ${websiteUrl}
 
@@ -52,8 +51,7 @@ Features:
 - Delete tours
 - Beautiful responsive design
 
-Enjoy managing your Morocco tours business!
-    `;
+Enjoy managing your Morocco tours business!`;
 
     const response = await fetch("https://api.sendgrid.com/v3/mail/send", {
       method: "POST",
@@ -65,14 +63,14 @@ Enjoy managing your Morocco tours business!
         personalizations: [
           {
             to: [{ email: email }],
-            subject: "🏜️ Your Morocco Tours Website is Ready!",
+            subject: "Your Morocco Tours Website is Ready!",
           },
         ],
         from: { email: "noreply@moroccobtours.com", name: "Morocco Tours" },
         content: [
           {
             type: "text/plain",
-            value: emailContent,
+            value: emailText,
           },
         ],
       }),
